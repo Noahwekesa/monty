@@ -2,9 +2,10 @@
 #define MONTY_H
 
 #include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#define N_OPCODES 17
+#include <stdio.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -56,13 +57,13 @@ void dn_exit_cleanup(char *buf, FILE *fd);
 void dn_init_program(int argc, char **argv, FILE **fd, char **buf, size_t *bs);
 void dn_free_stack(void);
 
-/*dn_function1*/
+/*dn_function1&2*/
 char *dn_find_arg0(char *buf);
 char *dn_find_arg1(char *buf);
 int dn_word_match(char *s1, char *s2);
 int dn_parse_number(void);
 int dn_stack(stack_t **stack);
-int dn_top_two(stack_t **stack)
+int dn_top_two(stack_t **stack);
 /*Tasks*/
 /* push, pall, create, error handling*/
 void dn_push(stack_t **stack, unsigned int line_number);
@@ -77,14 +78,41 @@ void process_function_error(int line, const char *msg);
 void dn_pint(stack_t **stack, unsigned int line_element);
 
 /* 2. dn_pop */
-void dn_pop(stack_t **stack, unsigned int line_element)
+void dn_pop(stack_t **stack, unsigned int line_element);
 
 /*3. dn_swap*/
-void dn_swap(stack_t **stack, unsigned int line_number)
+void dn_swap(stack_t **stack, unsigned int line_number);
 
 /*4. dn_add*/
-void dn_add(stack_t **stack, unsigned int line_number)
+void dn_add(stack_t **stack, unsigned int line_number);
 
 /*5. dn_nop*/
 void dn_nop(stack_t **stack, unsigned int elm);
+
+/*6 dn_div*/
+void dn_div(stack_t **stack, unsigned int line_number);
+
+/*7 dn_mul*/
+void dn_mul(stack_t **stack, unsigned int line_number);
+
+/*9. dn_mod*/
+void dn_mod(stack_t **stack, unsigned int line_number);
+/*dn_pchar*/
+void dn_pchar(stack_t **stack, unsigned int line_number);
+
+/*12. dn_pstr*/
+void dn_pstr(stack_t **stack, unsigned int line_number);
+
+/*13 dn_rotl*/
+void dn_rotl(stack_t **stack, unsigned int line_number);
+
+/*14. rotr*/
+void dn_rotr(stack_t **stack, unsigned int line_number);
+
+/*15. stack, queue*/
+void dn_stack1(stack_t **stack, unsigned int line_number);
+void dn_queue(stack_t **stack, unsigned int line_number);
+
+/*others*/
+void dn_sub(stack_t **stack, unsigned int line_number);
 #endif

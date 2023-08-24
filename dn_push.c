@@ -14,17 +14,17 @@ void dn_push(stack_t **stack, unsigned int line_number)
 		printf("DEBUG: We made a mistake creating our stack\n");
 	if (*stack == NULL)
 	{
-		global.stack = create_new_node();
+		*stack = create_new_node();
 		if (global.mode == 2)
-			printf("L%u: usage: push integer\n", line);
+			printf("L%u: usage: push integer\n", line_number);
 	}
 	else
 	{
 		new_elm_node = *stack;
-		global.stack = create_new_node();
+		*stack = create_new_node();
 		if (global.mode == 2)
 		{
-			printf("L%u: usage: push integer\n", line);
+			printf("L%u: usage: push integer\n", line_number);
 			return;
 		}
 		global.stack->next = new_elm_node;
@@ -43,7 +43,7 @@ stack_t *create_new_node(void)
         exit_w_error("Error: malloc failed");
     }
 
-    node->n = parse_number();
+    node->n = dn_parse_number();
     node->prev = NULL;
     node->next = NULL;
 

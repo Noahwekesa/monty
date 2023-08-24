@@ -7,7 +7,7 @@
  */
 void dn_pint(stack_t **stack, unsigned int line_element)
 {
-	if (!valid_stack(stack))
+	if (!dn_stack(stack))
 	{
 		printf("L%u: can't pint, stack empty\n", line_element);
 		global.mode = 2;

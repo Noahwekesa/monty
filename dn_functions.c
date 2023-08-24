@@ -29,7 +29,7 @@ char *dn_find_arg1(char *buf)
 	}
 	while (*buf != ' ')
 	{
-		if (buf == '\0')
+		if (*buf == '\0')
 			return (NULL);
 		buf++;
 	}
@@ -76,7 +76,7 @@ int dn_parse_number(void)
 {
 	char *arg_ptr;
 
-	arg_ptr = find_arg2(global.buf);
+	arg_ptr = dn_find_arg1(global.buf);
 	if ((*arg_ptr < '0' || *arg_ptr > '9') && *arg_ptr != '-')
 	{
 		global.mode = 2;

@@ -17,13 +17,13 @@ int main(int argc, char **argv)
 	{"push", &dn_push}, {"pall", &dn_pall}, {"pint", &dn_pint}, {"pop", &dn_pop},
 	{"swap", &dn_swap}, {"add", &dn_add}, {"nop", &dn_nop}, {"sub", &dn_sub},
 	{"div", &dn_div}, {"mul", &dn_mul}, {"mod", &dn_mod},	{"pchar", &dn_pchar},
-	{"pstr", &dn_pstr}, {"rotl", &dn_rotl}, {"rotr", &dn_rotr}, {"stack", &dn_stack},
+	{"pstr", &dn_pstr}, {"rotl", &dn_rotl}, {"rotr", &dn_rotr}, {"stack", &dn_stack1},
 	{"queue", &dn_queue}, };
 	dn_init_program(argc, argv, &fd, &global.buf, &bufsize);
 	line = 0;
 	while (1)
 	{
-		if (getline(&global.buf, &bufsize, fd) == -1)
+		if (fgets(global.buf, bufsize, fd) == NULL)
 			break;
 		line += 1;
 
@@ -82,7 +82,7 @@ void dn_exit_cleanup(char *buf, FILE *fd)
 
 	(void) buf;
 	free(global.buf);
-	free_stack();
+	dn_free_stack();
 	fclose(fd);
 }
 /**
