@@ -34,7 +34,36 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+/**
+ * struct global - function of useful global variables
+ * @stack: top stack
+ * @tail: bottom stack
+ * @buf: buffer
+ * @mode: 0 = stacking, 1 = queuing, 2 = program error, clean and exit
+ */
+typedef struct global_s
+{
+    stack_t *stack;
+    stack_t *tail;
+    char *buf;
+    int mode;
+} global_t;
 
+extern global_t global;
+
+/* dn_monty_interpreter */
+void dn_exit_cleanup(char *buf, FILE *fd);
+void dn_init_program(int argc, char **argv, FILE **fd, char **buf, size_t *bs);
+void dn_free_stack(void);
+
+/*dn_function1*/
+char *dn_find_arg0(char *buf);
+char *dn_find_arg1(char *buf);
+int dn_word_match(char *s1, char *s2);
+int dn_parse_number(void);
+int dn_stack(stack_t **stack);
+int dn_top_two(stack_t **stack)
+/*Tasks*/
 /* push, pall, create, error handling*/
 void dn_push(stack_t **stack, unsigned int line_number);
 stack_t *create_new_node(void);
