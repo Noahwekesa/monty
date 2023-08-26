@@ -8,26 +8,23 @@
  */
 stack_t *dn_add_node(stack_t **head, const int n)
 {
-	stack_t *elment_1;
+    if (!head)
+        return (NULL);
 
+    stack_t *new_node = malloc(sizeof(stack_t));
+    if (!new_node)
+        return (NULL);
 
-	if (!head)
-		return (NULL);
+    new_node->n = n;
+    new_node->prev = NULL;
+    new_node->next = *head;
 
-	elment_1 = malloc(sizeof(stack_t));
-	if (elment_1 == NULL)
-		return (NULL);
-
-	elment_1->n = n;
-	elment_1->prev = NULL;
-	elment_1->next = *head;
-
-	if (*head)
-		(*head)->prev = elment_1;
-	*head = elment_1;
-	return (elment_1);
+    if (*head)
+        (*head)->prev = new_node;
+    
+    *head = new_node;
+    return (new_node);
 }
-
 
 /**
  * dn_free_stack - progam that free a dll of int
@@ -103,28 +100,28 @@ stack_t *dn_queue(stack_t **head)
  */
 stack_t *add_at_end(stack_t **head, int n)
 {
-	stack_t *elment_1, *elm;
+    if (!head)
+        return (NULL);
 
-	if (!head)
-		return (NULL);
-	elment_1 = malloc(sizeof(stack_t));
-	if (!elment_1)
-		return (NULL);
+    stack_t *new_node = malloc(sizeof(stack_t));
+    if (!new_node)
+        return (NULL);
 
-	elment_1->n = n;
-	elment_1->next = NULL;
+    new_node->n = n;
+    new_node->next = NULL;
 
-	if (*head)
-	{
-		for (elm = *head; elm->next;)
-			elm = elm->next;
-		elment_1->prev = elm;
-		elm->next = elment_1;
-	}
-	else
-	{
-		elment_1->prev = NULL;
-		*head = elment_1;
-	}
-	return (elment_1);
+    if (*head)
+    {
+        stack_t *elm = *head;
+        while (elm->next)
+            elm = elm->next;
+        new_node->prev = elm;
+        elm->next = new_node;
+    }
+    else
+    {
+        new_node->prev = NULL;
+        *head = new_node;
+    }
+    return (new_node);
 }
