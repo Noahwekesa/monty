@@ -4,10 +4,10 @@
  * dn_push - program that add an element to the stack
  * @h: ptr
  * @line: pointer to line
- * @l: line number
+ * @line_number: line number
  * Return: 0 success, -1 failure
  */
-int dn_push(stack_t **h, char *line, unsigned int l)
+int dn_push(stack_t **h, char *line, unsigned int line_number)
 {
 	char *begin_n;
 	stack_t *node;
@@ -15,7 +15,7 @@ int dn_push(stack_t **h, char *line, unsigned int l)
 	begin_n = dn_reach_element(line);
 	if (begin_n == NULL)
 	{
-		printf("L%d: usage: push integer\n", l);
+		printf("L%d: usage: push integer\n ", line_number);
 		free(line);
 		return (-1);
 	};
