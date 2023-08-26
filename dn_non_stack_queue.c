@@ -13,7 +13,7 @@ void dn_nop(stack_t **h, unsigned int l)
 
 
 /**
- * dn_queue - program that change behavior to dn_queue
+ * dnqueue - program that change behavior to dn_queue
  * @h: ptr
  * @l: line number
  */
@@ -27,8 +27,8 @@ void dnqueue(stack_t **h, unsigned int l)
 
 
 /**
- * stack - change behavior to stack
- * @h: pointer to dll
+ * dncstack - program that change behavior to stack
+ * @h: ptr
  * @l: line number
  */
 void dncstack(stack_t **h, unsigned int l)

@@ -45,7 +45,6 @@ typedef struct instruction_s
 } instruction_t;
 
 
-
 /*functions*/
 stack_t *dn_add_node(stack_t **head, const int n);
 void dn_free_stack(stack_t *head);

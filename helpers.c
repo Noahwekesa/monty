@@ -19,7 +19,7 @@ int dn_strlen(char *s)
  * dn_skip - skip whitespaces
  * @s: a str
  *
- * Return: ptr 
+ * Return: ptr
  */
 char *dn_skip(char *s)
 {

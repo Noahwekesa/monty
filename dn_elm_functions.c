@@ -71,7 +71,7 @@ void dn_rotr(stack_t **h, unsigned int l)
 	if (!h || !*h)
 		return;
 	if (!(*h)->next)
-		return; 
+	return;
 
 	node = dn_queue(h);
 	node->prev = NULL;
