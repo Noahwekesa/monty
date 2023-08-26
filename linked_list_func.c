@@ -25,7 +25,7 @@ stack_t *dn_add_node(stack_t **head, const int n)
 	if (*head)
 		(*head)->prev = elment_1;
 	*head = elment_1;
-	return (elment_1);
+	return (NULL);
 }
 
 
@@ -126,5 +126,5 @@ stack_t *add_at_end(stack_t **head, int n)
 		elment_1->prev = NULL;
 		*head = elment_1;
 	}
-	return (elment_1);
+	return (NULL);
 }
