@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include <limits.h>
 /*extern variable, stack or queue*/
 
 extern char *flag;

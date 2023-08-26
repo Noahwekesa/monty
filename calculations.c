@@ -10,10 +10,16 @@ void dn_add(stack_t **h, unsigned int l)
 	int number1, number2;
 
 	number1 = dn_argument(h, "add", l);
+	if (number1 == INT_MIN)
+		return;
+
 	number2 = dn_argument(h, "add", l);
+	if (number2 == INT_MIN)
+	return;
 
 	dn_add_node(h, number1 + number2);
 }
+
 
 
 /**
