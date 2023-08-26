@@ -43,13 +43,11 @@ void dn2_pop(stack_t **h, unsigned int l)
 {
 	stack_t *node;
 
-	node = dn_pop(h);
-
-	if (node == NULL)
+	if (!*h)
 	{
 		printf("L%d: can't pop an empty %s\n", l, flag);
-		dn_free_stack(*h);
 		exit(EXIT_FAILURE);
 	}
+	node = dn_pop(h);
 	free(node);
 }
