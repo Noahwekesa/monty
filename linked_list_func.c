@@ -8,10 +8,11 @@
  */
 stack_t *dn_add_node(stack_t **head, const int n)
 {
+	stack_t *new_node;
     if (!head)
         return (NULL);
 
-    stack_t *new_node = malloc(sizeof(stack_t));
+    new_node = malloc(sizeof(stack_t));
     if (!new_node)
         return (NULL);
 
@@ -100,10 +101,12 @@ stack_t *dn_queue(stack_t **head)
  */
 stack_t *add_at_end(stack_t **head, int n)
 {
+    stack_t *new_node, *elm;
+
     if (!head)
         return (NULL);
 
-    stack_t *new_node = malloc(sizeof(stack_t));
+    new_node = malloc(sizeof(stack_t));
     if (!new_node)
         return (NULL);
 
@@ -112,7 +115,7 @@ stack_t *add_at_end(stack_t **head, int n)
 
     if (*head)
     {
-        stack_t *elm = *head;
+        elm = *head;
         while (elm->next)
             elm = elm->next;
         new_node->prev = elm;
