@@ -1,11 +1,18 @@
-#ifndef MONTY_H
-#define MONTY_H
+#ifndef _MONTY_H_
+#define _MONTY_H_
 
-#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#define N_OPCODES 17
-#include <stdio.h>
+
+/*extern variable, stack or queue*/
+
+extern char *flag;
+
+#define BUF_LENGTH 1024
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -14,7 +21,7 @@
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct stack_s
 {
@@ -22,97 +29,69 @@ typedef struct stack_s
         struct stack_s *prev;
         struct stack_s *next;
 } stack_t;
+
 /**
- * struct instruction_s - opcode and its function
+ * struct instruction_s - opcoode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct instruction_s
 {
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-/**
- * struct global - function of useful global variables
- * @stack: top stack
- * @tail: bottom stack
- * @buf: buffer
- * @mode: 0 = stacking, 1 = queuing, 2 = program error, clean and exit
- */
-typedef struct global_s
-{
-    stack_t *stack;
-    stack_t *tail;
-    char *buf;
-    int mode;
-} global_t;
 
-extern global_t global;
 
-/* dn_monty_interpreter */
-void dn_exit_cleanup(char *buf, FILE *fd);
-void dn_init_program(int argc, char **argv, FILE **fd, char **buf, size_t *bs);
-void dn_free_stack(void);
 
-/*dn_function1&2*/
-char *dn_find_arg0(char *buf);
-char *dn_find_arg1(char *buf);
-int dn_word_match(char *s1, char *s2);
-int dn_parse_number(void);
-int dn_stack(stack_t **stack);
-int dn_top_two(stack_t **stack);
-/*Tasks*/
-/* push, pall, create, error handling*/
-void dn_push(stack_t **stack, unsigned int line_number);
-stack_t *create_new_node(void);
-void dn_pall(stack_t **stack, unsigned int line_number);
-void exit_w_error(const char *msg);
-void open_f_error(const char *file);
-void code_invalid_error(int line, const char *opcode);
-void process_function_error(int line, const char *msg);
+/*functions*/
+stack_t *dn_add_node(stack_t **head, const int n);
+void dn_free_stack(stack_t *head);
+stack_t *dn_pop(stack_t **head);
+stack_t *add_at_end(stack_t **head, int n);
+stack_t *dn_queue(stack_t **head);
 
-/*1. dn_pint*/
-void dn_pint(stack_t **stack, unsigned int line_element);
+/*add,sub,div,mod and mul*/
+int dn_argument(stack_t **h, char *opcode, unsigned int l);
+void dn_add(stack_t **h, unsigned int l);
+void dn_sub(stack_t **h, unsigned int l);
+void dn_div(stack_t **h, unsigned int l);
+void dn_mul(stack_t **h, unsigned int l);
+void dn_mod(stack_t **h, unsigned int l);
 
-/* 2. dn_pop */
-void dn_pop(stack_t **stack, unsigned int line_element);
+/*print_func*/
+void dn_pchar(stack_t **h, unsigned int l);
+void dn_pall(stack_t **h, unsigned int l);
+void dn_pint(stack_t **h, unsigned int l);
+void dn_pstr(stack_t **h, unsigned int l);
 
-/*3. dn_swap*/
-void dn_swap(stack_t **stack, unsigned int line_number);
+/* dn_getline.c */
+ssize_t dn_getline(char **buf, size_t *size, int file_strm);
 
-/*4. dn_add*/
-void dn_add(stack_t **stack, unsigned int line_number);
+/*dn_execute*/
+int execute_program(stack_t **h, char *line, unsigned int line_number);
 
-/*5. dn_nop*/
-void dn_nop(stack_t **stack, unsigned int elm);
+/*dn_pop_push*/
+void dn2_pop(stack_t **h, unsigned int l);
+int dn_push (stack_t **h, char *line, unsigned int l);
 
-/*6 dn_div*/
-void dn_div(stack_t **stack, unsigned int line_number);
+/*dn_elm_functions*/
+void dn_swap(stack_t **h, unsigned int l);
+void dn_rotl(stack_t **h, unsigned int l);
+void dn_rotr(stack_t **h, unsigned int l);
 
-/*7 dn_mul*/
-void dn_mul(stack_t **stack, unsigned int line_number);
+/* dn_non_stack_queue*/
+void dnqueue(stack_t **h, unsigned int l);
+void dn_nop(stack_t **h, unsigned int l);
+void dncstack(stack_t **h, unsigned int l);
 
-/*9. dn_mod*/
-void dn_mod(stack_t **stack, unsigned int line_number);
-/*dn_pchar*/
-void dn_pchar(stack_t **stack, unsigned int line_number);
+/*support_func*/
+int dn_strcmp(char *s1, char *s2);
+int dn_strlen(char *s);
+char *dn_reach(char *s);
+int dn_strncmp(char *s1, char *s2, int n);
+char *dn_skip(char *s);
 
-/*12. dn_pstr*/
-void dn_pstr(stack_t **stack, unsigned int line_number);
-
-/*13 dn_rotl*/
-void dn_rotl(stack_t **stack, unsigned int line_number);
-
-/*14. rotr*/
-void dn_rotr(stack_t **stack, unsigned int line_number);
-
-/*15. stack, queue*/
-void dn_stack1(stack_t **stack, unsigned int line_number);
-void dn_queue(stack_t **stack, unsigned int line_number);
-
-/*others*/
-void dn_sub(stack_t **stack, unsigned int line_number);
 #endif
