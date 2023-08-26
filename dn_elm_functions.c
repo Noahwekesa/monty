@@ -7,28 +7,22 @@
  */
 void dn_swap(stack_t **h, unsigned int l)
 {
-	int number;
+    stack_t *top1, *top2;
+    int temp;
 
-	if (!h || !*h)
-	{
-		printf("L%d: can't swap, %s too short\n", l, flag);
-		dn_free_stack(*h);
-		exit(EXIT_FAILURE);
-	}
+    if (!*h || !(*h)->next)
+    {
+        printf("L%d: can't swap, stack too short\n", l);
+        exit(EXIT_FAILURE);
+    }
 
-	number = (*h)->n;
+    top1 = *h;
+    top2 = (*h)->next;
 
-	if ((*h)->next == NULL)
-	{
-		printf("L%d: can't swap, %s too short\n", l, flag);
-		dn_free_stack(*h);
-		exit(EXIT_FAILURE);
-	}
-
-	(*h)->n = ((*h)->next)->n;
-	((*h)->next)->n = number;
+    temp = top1->n;
+    top1->n = top2->n;
+    top2->n = temp;
 }
-
 
 /**
  * dn_rotl - program that top element of the stack moves to the back
