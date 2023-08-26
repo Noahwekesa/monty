@@ -15,7 +15,7 @@ int dn_push(stack_t **h, char *line, unsigned int line_number)
 	begin_n = dn_reach_element(line);
 	if (begin_n == NULL)
 	{
-		printf("L%d: usage: push integer\n ", line_number);
+		printf("L%d: usage: push integer\n", line_number);
 		free(line);
 		return (-1);
 	};

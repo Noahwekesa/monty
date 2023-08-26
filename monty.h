@@ -74,7 +74,7 @@ int execute_program(stack_t **h, char *line, unsigned int line_number);
 
 /*dn_pop_push*/
 void dn2_pop(stack_t **h, unsigned int l);
-int dn_push (stack_t **h, char *line, unsigned int line_number);
+int dn_push(stack_t **h, char *line, unsigned int line_number);
 
 /*dn_elm_functions*/
 void dn_swap(stack_t **h, unsigned int l);
